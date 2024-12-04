@@ -1,45 +1,34 @@
+// src/Equation.cpp
 #include "Equation.h"
-#include <iostream>
 
-void Equation::compute_initial_condition(Variable &u, IMesh *mesh)
-{
-    double T1=30;
-    double T2=15;
+void Equation::compute_boundary_conditions(Variable& u_kp1) {
+    int n = u_kp1.size();
+    u_kp1[0] = 30.0;          // 左边界条件 T1 = 30
+    u_kp1[n - 1] = 15.0;      // 右边界条件 T2 = 15
+}
 
-    int mid_point=mesh->x_size()/2;
-
-    for (int i = 0;i<mid_point;++i){
-        u[i]=T1;
+void Equation::compute_residual(const Variable& u, Variable& residual) {
+    int n = u.size();
+    for (int i = 1; i < n - 1; ++i) {
+        residual[i] = u[i - 1] - 2 * u[i] + u[i + 1];
     }
-    
-    for (int i = mid_point;i<mesh->x_size();++i){
-        u[i]=T2;
-    }
-
+    residual[0] = 0.0;
+    residual[n - 1] = 0.0;
 }
 
 
-void Equation::compute_boundary_conditions(Variable& u, IMesh* mesh) {
+void Equation::compute_exact_solution(Variable& u_exact) {
+    // 假设 T1 和 T2 是已知的边界条件
     double T1 = 30.0;
     double T2 = 15.0;
 
-    // 设置边界条件
-    u[0] = T1;               // 左边界
-    u[mesh->x_size() - 1] = T2; // 右边界
-}
+    IMesh* mesh = u_exact.getMesh();
+    int n = u_exact.size();
 
-void Equation::compute(Variable& u_k, Variable& u_kp1, IMesh* mesh) {
-    int n = u_k.size();
-
-    for (int i = 1; i < n - 1; ++i) {
-        double x_i = mesh->x_size(i);
-        double x_i_minus = mesh->x_size(i - 1);
-        double x_i_plus = mesh->x_size(i + 1);
-
-        double dx_minus = x_i - x_i_minus;
-        double dx_plus = x_i_plus - x_i;
-
-        // 使用加权平均，考虑非均匀网格
-        u_kp1[i] = ((u_k[i - 1] / dx_minus) + (u_k[i + 1] / dx_plus)) / ((1.0 / dx_minus) + (1.0 / dx_plus));
+    for (int i = 0; i < n; ++i) {
+        double x = mesh->x_size(i);
+        u_exact[i] = (T2 - T1) * x + T1;
     }
 }
+
+

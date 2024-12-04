@@ -1,30 +1,33 @@
+// Variable.h
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include <vector>
 #include "IMesh.h"
+#include <vector>
+#include <string>
 
-
-class Variable
-{
+class Variable {
 private:
-    /* data */
-    IMesh*mesh;
+    IMesh* mesh;
     std::vector<double> values;
+    std::string m_name; // 新增的成员变量
 
 public:
-    /**
-     * @brief 构造函数，创造接引指针，初始化网格大小
-     */
-    Variable(IMesh*mesh);
-    /**
-     * @brief 重新加载opera
-     */
+    Variable(IMesh* mesh);
+
     double& operator[](int i);
-    //获取变量大小
+    const double& operator[](int i) const;
+
     int size() const;
+    IMesh* getMesh() const;
+
+    Variable& operator=(const Variable& other);
+
+    // 新增的方法
+    void setName(const std::string& name);
+    const std::string& getName() const;
+
+    void print() const;
 };
 
-
-
-#endif
+#endif // VARIABLE_H

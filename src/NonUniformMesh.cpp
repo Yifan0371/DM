@@ -1,19 +1,15 @@
+// src/NonUniformMesh.cpp
 #include "NonUniformMesh.h"
-#include <stdexcept>
+#include <cmath>
 
 NonUniformMesh::NonUniformMesh(double x_min, double x_max, double dx)
     : x_min(x_min), x_max(x_max), dx(dx) {
-    // 简单示例：生成非均匀分布的网格点
-    if (x_max <= x_min || dx <= 0) {
-        throw std::invalid_argument("Invalid mesh parameters.");
-    }
-
-    double x = x_min;
-    while (x <= x_max) {
-        positions.push_back(x);
-        // 非均匀步长示例（这里简单地逐步增加 dx）
-        x += dx;
-        dx *= 1.1; // 步长逐渐增加
+    // 示例：简单实现一个非均匀网格，这里只是为了演示
+    int n_points = static_cast<int>(std::round((x_max - x_min) / dx)) + 1;
+    x_points.resize(n_points);
+    for (int i = 0; i < n_points; ++i) {
+        double ratio = static_cast<double>(i) / (n_points - 1);
+        x_points[i] = x_min + (x_max - x_min) * std::pow(ratio, 2); // 非均匀分布
     }
 }
 
@@ -26,24 +22,17 @@ double NonUniformMesh::getFinalPosition() const {
 }
 
 int NonUniformMesh::getNumberOfPoints() const {
-    return positions.size();
+    return x_points.size();
 }
 
 double NonUniformMesh::getStepSize() const {
-    // 返回平均步长
-    if (positions.size() < 2) {
-        return 0.0;
-    }
-    return (positions.back() - positions.front()) / (positions.size() - 1);
+    return dx; // 对于非均匀网格，这个值可能没有意义
 }
 
 int NonUniformMesh::x_size() const {
-    return positions.size();
+    return x_points.size();
 }
 
 double NonUniformMesh::x_size(int i) const {
-    if (i < 0 || i >= positions.size()) {
-        throw std::out_of_range("Index out of range in NonUniformMesh::x_size");
-    }
-    return positions[i];
+    return x_points[i];
 }

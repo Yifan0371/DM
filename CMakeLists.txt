@@ -1,54 +1,53 @@
-cmake_minimum_required(VERSION 3.10)
-
-# 设置项目名称
+# CMakeLists.txt
+cmake_minimum_required(VERSION 3.14)
 project(LaplaceSimulator)
 
-# 设置C++标准
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# 主可执行文件
+add_executable(LaplaceSimulator
+    src/main.cpp
+    src/Problem.cpp
+    src/Equation.cpp
+    src/Variable.cpp
+    src/UniformMesh.cpp
+    src/NonUniformMesh.cpp
+)
+
+# 包含头文件目录
+target_include_directories(LaplaceSimulator PRIVATE src)
 
 # 启用测试
 enable_testing()
 
-# 包含头文件目录
-include_directories(src)
-
-# 主程序源文件
-set(SOURCES
-    src/main.cpp
-    src/Problem.cpp
-    src/Equation.cpp
-    src/UniformMesh.cpp
-    src/NonUniformMesh.cpp  # 添加新的源文件
-    src/Variable.cpp
+# 添加 GTest
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/release-1.12.1.zip
 )
-
-# 添加主程序可执行文件
-add_executable(LaplaceSimulator ${SOURCES})
-
-# 添加一个运行主程序的测试
-add_test(NAME structure_test COMMAND LaplaceSimulator)
-
-# 查找 GTest 库
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
-
-# 测试源文件
-set(TEST_SOURCES
-    src/test.cpp
-    src/Equation.cpp
-    src/Problem.cpp
-    src/UniformMesh.cpp
-    src/NonUniformMesh.cpp  # 添加新的源文件
-    src/Variable.cpp
-)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 # 添加测试可执行文件
-add_executable(UnitTests ${TEST_SOURCES})
+add_executable(LaplaceSimulatorTests
+    tests/UniformMeshTest.cpp
+    tests/ProblemTest.cpp
+    tests/EquationTest.cpp
+    src/Problem.cpp
+    src/Equation.cpp
+    src/Variable.cpp
+    src/UniformMesh.cpp
+    src/NonUniformMesh.cpp
+)
 
-# 链接 GTest 库和 pthread 库
-target_link_libraries(UnitTests GTest::GTest GTest::Main pthread)
+# 链接 GTest 库
+target_link_libraries(LaplaceSimulatorTests GTest::gtest_main)
 
-# 使用 gtest_discover_tests 自动发现测试
+# 包含头文件目录
+target_include_directories(LaplaceSimulatorTests PUBLIC src)
+
+# 添加测试
 include(GoogleTest)
-gtest_discover_tests(UnitTests)
+gtest_discover_tests(LaplaceSimulatorTests)

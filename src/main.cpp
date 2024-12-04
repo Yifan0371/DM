@@ -1,3 +1,4 @@
+// src/main.cpp
 #include "Problem.h"
 #include "UniformMesh.h"
 #include "NonUniformMesh.h"
@@ -43,7 +44,7 @@ int main(int argc, char** argv) {
     // 默认参数
     double x_min = 0.0;
     double x_max = 1.0;
-    double dx = 0.2;
+    double dx = 0.01;
     std::string meshTypeStr = "uniform";
 
     // 解析命令行参数
@@ -67,9 +68,10 @@ int main(int argc, char** argv) {
         MeshType meshType = parseMeshType(meshTypeStr);
         auto mesh = createMesh(meshType, x_min, x_max, dx);
 
-        // 将所有权转移给 Problem 对象
+        // 创建 Problem 实例
         Problem problem(std::move(mesh));
 
+        // 求解问题
         problem.solve();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
