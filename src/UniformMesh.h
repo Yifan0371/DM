@@ -1,4 +1,3 @@
-// src/UniformMesh.h
 #ifndef UNIFORMMESH_H
 #define UNIFORMMESH_H
 

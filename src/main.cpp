@@ -1,4 +1,3 @@
-// src/main.cpp
 #include "Problem.h"
 #include "UniformMesh.h"
 #include "NonUniformMesh.h"

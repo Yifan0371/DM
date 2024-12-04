@@ -1,16 +1,15 @@
-// Variable.h
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
-#include "IMesh.h"
 #include <vector>
 #include <string>
+#include "IMesh.h"
 
 class Variable {
 private:
     IMesh* mesh;
     std::vector<double> values;
-    std::string m_name; // 新增的成员变量
+    std::string m_name;
 
 public:
     Variable(IMesh* mesh);
@@ -23,11 +22,14 @@ public:
 
     Variable& operator=(const Variable& other);
 
-    // 新增的方法
     void setName(const std::string& name);
     const std::string& getName() const;
 
     void print() const;
+    void exportToVTK(const std::string& filename) const;
+
+    const std::vector<double>& getValues() const;
+    std::vector<double>& getValues();
 };
 
 #endif // VARIABLE_H

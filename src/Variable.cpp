@@ -1,5 +1,5 @@
-// Variable.cpp
 #include "Variable.h"
+#include <stdexcept>
 #include <iostream>
 #include <fstream>
 
@@ -57,14 +57,8 @@ void Variable::print() const {
     // 显示变量名称
     std::cout << "Variable: " << m_name << std::endl;
 
-    // 显示变量值
-    for (int i = 0; i < values.size(); ++i) {
-        std::cout << "x[" << i << "] = " << mesh->x_size(i)
-                  << ", " << m_name << "[" << i << "] = " << values[i] << std::endl;
-    }
-
     // 导出到文件
-    std::string filename = "Variable_" + m_name + ".data";
+    std::string filename = m_name + ".data";
     std::ofstream outfile(filename);
     if (outfile.is_open()) {
         for (int i = 0; i < values.size(); ++i) {
@@ -75,4 +69,43 @@ void Variable::print() const {
     } else {
         std::cerr << "Failed to open file " << filename << " for writing." << std::endl;
     }
+}
+
+void Variable::exportToVTK(const std::string& filename) const {
+    std::ofstream outfile(filename);
+    if (!outfile.is_open()) {
+        std::cerr << "Failed to open file " << filename << " for writing." << std::endl;
+        return;
+    }
+
+    int num_points = size();
+    outfile << "# vtk DataFile Version 3.0\n";
+    outfile << "VTK file containing grid data\n";
+    outfile << "ASCII\n";
+    outfile << "DATASET STRUCTURED_GRID\n";
+    outfile << "DIMENSIONS " << num_points << " 1 1\n";
+    outfile << "POINTS " << num_points << " double\n";
+
+    for (int i = 0; i < num_points; ++i) {
+        outfile << mesh->x_size(i) << " 0 0\n";
+    }
+
+    outfile << "POINT_DATA " << num_points << "\n";
+    outfile << "SCALARS " << m_name << " double\n";
+    outfile << "LOOKUP_TABLE default\n";
+
+    for (double val : values) {
+        outfile << val << "\n";
+    }
+
+    outfile.close();
+    std::cout << "VTK data exported to " << filename << std::endl;
+}
+
+const std::vector<double>& Variable::getValues() const {
+    return values;
+}
+
+std::vector<double>& Variable::getValues() {
+    return values;
 }

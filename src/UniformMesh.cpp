@@ -1,4 +1,3 @@
-// src/UniformMesh.cpp
 #include "UniformMesh.h"
 #include <cmath>
 

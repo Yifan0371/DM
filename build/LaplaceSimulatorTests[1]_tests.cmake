@@ -1,0 +1,7 @@
+add_test([=[UnitaryTest.MeshTest]=]  [==[/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/LaplaceSimulatorTests]==] [==[--gtest_filter=UnitaryTest.MeshTest]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[UnitaryTest.MeshTest]=]  PROPERTIES WORKING_DIRECTORY [==[/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[UnitaryTest.ProblemTest]=]  [==[/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/LaplaceSimulatorTests]==] [==[--gtest_filter=UnitaryTest.ProblemTest]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[UnitaryTest.ProblemTest]=]  PROPERTIES WORKING_DIRECTORY [==[/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[MainFunctionTest.EquationTest]=]  [==[/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/LaplaceSimulatorTests]==] [==[--gtest_filter=MainFunctionTest.EquationTest]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[MainFunctionTest.EquationTest]=]  PROPERTIES WORKING_DIRECTORY [==[/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  LaplaceSimulatorTests_TESTS UnitaryTest.MeshTest UnitaryTest.ProblemTest MainFunctionTest.EquationTest)

@@ -1,4 +1,3 @@
-// tests/EquationTest.cpp
 #include "Equation.h"
 #include "Variable.h"
 #include "UniformMesh.h"

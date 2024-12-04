@@ -1,34 +1,34 @@
-// src/Equation.cpp
+// Equation.cpp
 #include "Equation.h"
 
 void Equation::compute_boundary_conditions(Variable& u_kp1) {
-    int n = u_kp1.size();
-    u_kp1[0] = 30.0;          // 左边界条件 T1 = 30
-    u_kp1[n - 1] = 15.0;      // 右边界条件 T2 = 15
+    auto& values = u_kp1.getValues();
+    values.front() = T1;
+    values.back() = T2;
 }
 
 void Equation::compute_residual(const Variable& u, Variable& residual) {
+    const auto& u_values = u.getValues();
+    auto& residual_values = residual.getValues();
     int n = u.size();
-    for (int i = 1; i < n - 1; ++i) {
-        residual[i] = u[i - 1] - 2 * u[i] + u[i + 1];
-    }
-    residual[0] = 0.0;
-    residual[n - 1] = 0.0;
-}
 
+    residual_values.front() = 0.0;
+    residual_values.back() = 0.0;
+
+    for (int i = 1; i < n - 1; ++i) {
+        residual_values[i] = u_values[i - 1] - 2 * u_values[i] + u_values[i + 1];
+    }
+}
 
 void Equation::compute_exact_solution(Variable& u_exact) {
-    // 假设 T1 和 T2 是已知的边界条件
-    double T1 = 30.0;
-    double T2 = 15.0;
-
     IMesh* mesh = u_exact.getMesh();
-    int n = u_exact.size();
+    if (!mesh) {
+        throw std::invalid_argument("Mesh pointer is null in compute_exact_solution.");
+    }
 
-    for (int i = 0; i < n; ++i) {
-        double x = mesh->x_size(i);
-        u_exact[i] = (T2 - T1) * x + T1;
+    int size = u_exact.size();
+    for (int i = 0; i < size; ++i) {
+        double x_i = mesh->x_size(i);
+        u_exact[i] = (T2 - T1) * x_i + T1;
     }
 }
-
-

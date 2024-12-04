@@ -1,4 +1,3 @@
-// src/NonUniformMesh.h
 #ifndef NONUNIFORMMESH_H
 #define NONUNIFORMMESH_H
 

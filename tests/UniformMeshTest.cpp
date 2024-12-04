@@ -1,4 +1,3 @@
-// tests/UniformMeshTest.cpp
 #include "UniformMesh.h"
 #include "NonUniformMesh.h"
 #include <gtest/gtest.h>

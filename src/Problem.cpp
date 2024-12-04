@@ -1,14 +1,11 @@
-// src/Problem.cpp
+// Problem.cpp
 #include "Problem.h"
 #include "Jacobi.h"
 #include "GaussSeidel.h"
-#include <iostream>
 #include <cmath>
-#include <stdexcept>
+#include <iostream>
 
 Problem::Problem(std::unique_ptr<IMesh> mesh) : mesh(std::move(mesh)) {}
-
-Problem::~Problem() {}
 
 bool Problem::has_converged(const Variable& u_k, const Variable& u_kp1, double epsilon) const {
     double max_diff = 0.0;
@@ -24,7 +21,6 @@ bool Problem::has_converged(const Variable& u_k, const Variable& u_kp1, double e
     return max_diff < epsilon;
 }
 
-// Problem.cpp
 void Problem::solve() {
     if (!mesh) {
         throw std::runtime_error("Mesh is null in Problem::solve");
@@ -34,10 +30,12 @@ void Problem::solve() {
     Variable u_k(mesh.get());
     Variable u_kp1(mesh.get());
     Variable u_ref(mesh.get());
+    Variable u_kp1_gs(mesh.get());
 
     u_k.setName("u_k");
     u_kp1.setName("u_kp1");
     u_ref.setName("u_ref");
+    u_kp1_gs.setName("u_kp1_gs");
 
     // 计算精确解
     equation.compute_exact_solution(u_ref);
@@ -53,40 +51,57 @@ void Problem::solve() {
     // 导出初始条件
     u_k.print();
 
-    // 迭代求解过程
-    int iteration_count = 0;
-    double epsilon = 1e-5;
+    // Jacobi 方法迭代求解
+    {
+        int iteration_count = 0;
+        double epsilon = 1e-5;
+        Variable u_k_jacobi = u_k; // 保存初始条件
 
-    while (true) {
-        equation.compute_boundary_conditions(u_kp1);
-        equation.compute_for_solver<Jacobi>(u_k, u_kp1);
+        while (true) {
+            equation.compute_boundary_conditions(u_kp1);
+            equation.compute_for_solver<Jacobi>(u_k_jacobi, u_kp1);
 
-        if (has_converged(u_k, u_kp1, epsilon)) {
-            break;
+            if (has_converged(u_k_jacobi, u_kp1, epsilon)) {
+                break;
+            }
+
+            u_k_jacobi = u_kp1;
+            iteration_count++;
         }
 
-        u_k = u_kp1;
-        iteration_count++;
+        std::cout << "Jacobi method converged in " << iteration_count << " iterations." << std::endl;
+
+        // 导出数值解
+        u_kp1.print();
+        u_kp1.exportToVTK("Variable_u_kp1.vtk");
     }
 
-    std::cout << "Jacobi method converged in " << iteration_count << " iterations." << std::endl;
+    // Gauss-Seidel 方法迭代求解
+    {
+        int iteration_count = 0;
+        double epsilon = 1e-5;
+        Variable u_k_gs = u_k; // 保存初始条件
 
-    // 计算残差
-    Variable residual(mesh.get());
-    equation.compute_residual(u_kp1, residual);
+        while (true) {
+            equation.compute_boundary_conditions(u_kp1_gs);
+            equation.compute_for_solver<GaussSeidel>(u_k_gs, u_kp1_gs);
 
-    // 计算残差的无穷范数
-    double max_residual = 0.0;
-    for (int i = 0; i < residual.size(); ++i) {
-        double res = std::abs(residual[i]);
-        if (res > max_residual) {
-            max_residual = res;
+            if (has_converged(u_k_gs, u_kp1_gs, epsilon)) {
+                break;
+            }
+
+            u_k_gs = u_kp1_gs;
+            iteration_count++;
         }
+
+        std::cout << "Gauss-Seidel method converged in " << iteration_count << " iterations." << std::endl;
+
+        // 导出数值解
+        u_kp1_gs.print();
+        u_kp1_gs.exportToVTK("Variable_u_kp1_gs.vtk");
     }
 
-    std::cout << "Maximum residual: " << max_residual << std::endl;
-
-    // 导出数值解和精确解
-    u_kp1.print();
+    // 导出精确解
     u_ref.print();
+    u_ref.exportToVTK("Variable_u_ref.vtk");
 }

@@ -1,4 +1,3 @@
-// src/IMesh.h
 #ifndef IMESH_H
 #define IMESH_H
 
@@ -16,3 +15,4 @@ public:
 };
 
 #endif // IMESH_H
+    

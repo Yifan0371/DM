@@ -1,4 +1,3 @@
-// tests/ProblemTest.cpp
 #include "Problem.h"
 #include "UniformMesh.h"
 #include <gtest/gtest.h>
