@@ -1,4 +1,0 @@
-UnitaryTest.MeshTest 1 0.00230475
-UnitaryTest.ProblemTest 1 0.00532246
-MainFunctionTest.EquationTest 1 0.00212608
----

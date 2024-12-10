@@ -1,3 +1,4 @@
+// Problem.h
 #ifndef PROBLEM_H
 #define PROBLEM_H
 
@@ -12,6 +13,7 @@ private:
 public:
     Problem(std::unique_ptr<IMesh> mesh);
     void solve();
+    void solve_parallel(); // 新增：并行求解方法（TD5.2）
     bool has_converged(const Variable& u_k, const Variable& u_kp1, double epsilon = 1e-5) const;
 };
 

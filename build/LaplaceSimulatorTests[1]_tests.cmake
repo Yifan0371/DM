@@ -1,7 +1,0 @@
-add_test([=[UnitaryTest.MeshTest]=]  [==[/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests]==] [==[--gtest_filter=UnitaryTest.MeshTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[UnitaryTest.MeshTest]=]  PROPERTIES WORKING_DIRECTORY [==[/Users/yifanli/Desktop/M1/c++项目/DM/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[UnitaryTest.ProblemTest]=]  [==[/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests]==] [==[--gtest_filter=UnitaryTest.ProblemTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[UnitaryTest.ProblemTest]=]  PROPERTIES WORKING_DIRECTORY [==[/Users/yifanli/Desktop/M1/c++项目/DM/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[MainFunctionTest.EquationTest]=]  [==[/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests]==] [==[--gtest_filter=MainFunctionTest.EquationTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[MainFunctionTest.EquationTest]=]  PROPERTIES WORKING_DIRECTORY [==[/Users/yifanli/Desktop/M1/c++项目/DM/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  LaplaceSimulatorTests_TESTS UnitaryTest.MeshTest UnitaryTest.ProblemTest MainFunctionTest.EquationTest)

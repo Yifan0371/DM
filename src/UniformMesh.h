@@ -1,3 +1,4 @@
+// UniformMesh.h
 #ifndef UNIFORMMESH_H
 #define UNIFORMMESH_H
 
@@ -10,7 +11,7 @@ private:
     double x_max;
     double dx;
     std::vector<double> x_points;
-
+    
 public:
     UniformMesh(double x_min, double x_max, double dx);
 

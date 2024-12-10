@@ -4,8 +4,6 @@ project(LaplaceSimulator)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-
-
 # 主可执行文件
 add_executable(LaplaceSimulator
     src/main.cpp
@@ -14,9 +12,9 @@ add_executable(LaplaceSimulator
     src/Variable.cpp
     src/UniformMesh.cpp
     src/NonUniformMesh.cpp
+    src/Timer.cpp
 )
 
-# 包含头文件目录
 target_include_directories(LaplaceSimulator PRIVATE src)
 
 # 启用测试
@@ -41,14 +39,15 @@ add_executable(LaplaceSimulatorTests
     src/Variable.cpp
     src/UniformMesh.cpp
     src/NonUniformMesh.cpp
+    src/Timer.cpp
 )
 
-# 链接 GTest 库
 target_link_libraries(LaplaceSimulatorTests GTest::gtest_main)
-
-# 包含头文件目录
 target_include_directories(LaplaceSimulatorTests PUBLIC src)
 
-# 添加测试
 include(GoogleTest)
 gtest_discover_tests(LaplaceSimulatorTests)
+
+find_package(Threads)
+target_link_libraries(LaplaceSimulator Threads::Threads)
+target_link_libraries(LaplaceSimulatorTests Threads::Threads)

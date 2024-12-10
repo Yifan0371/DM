@@ -1,8 +1,10 @@
-// GaussSeidel.h
 #ifndef GAUSSSEIDEL_H
 #define GAUSSSEIDEL_H
 
 #include "Variable.h"
+#include <vector>
+#include <algorithm>
+#include <numeric>
 
 class GaussSeidel {
 public:
@@ -11,13 +13,17 @@ public:
         const auto& u_k_values = u_k.getValues();
         auto& u_kp1_values = u_kp1.getValues();
 
-        u_kp1_values[0] = u_k_values[0]; // 边界条件已经设置
+        u_kp1_values[0] = u_k_values[0];
+        u_kp1_values[n - 1] = u_k_values[n - 1];
 
-        for (int i = 1; i < n - 1; ++i) {
-            u_kp1_values[i] = 0.5 * (u_kp1_values[i - 1] + u_k_values[i + 1]);
-        }
+        std::vector<int> indices(n - 2);
+        std::iota(indices.begin(), indices.end(), 1);
 
-        u_kp1_values[n - 1] = u_k_values[n - 1]; // 边界条件已经设置
+        // Gauss-Seidel需要前面已更新的点，因此使用for_each
+        std::for_each(indices.begin(), indices.end(),
+                      [&u_k_values, &u_kp1_values](int i) {
+                          u_kp1_values[i] = 0.5 * (u_kp1_values[i - 1] + u_k_values[i + 1]);
+                      });
     }
 };
 

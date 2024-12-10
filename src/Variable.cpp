@@ -1,3 +1,4 @@
+// Variable.cpp
 #include "Variable.h"
 #include <stdexcept>
 #include <iostream>
@@ -15,21 +16,21 @@ Variable::Variable(IMesh* mesh) : mesh(mesh) {
 }
 
 double& Variable::operator[](int i) {
-    if (i < 0 || i >= values.size()) {
+    if (i < 0 || i >= (int)values.size()) {
         throw std::out_of_range("Index out of range in Variable::operator[]");
     }
     return values[i];
 }
 
 const double& Variable::operator[](int i) const {
-    if (i < 0 || i >= values.size()) {
+    if (i < 0 || i >= (int)values.size()) {
         throw std::out_of_range("Index out of range in Variable::operator[]");
     }
     return values[i];
 }
 
 int Variable::size() const {
-    return values.size();
+    return (int)values.size();
 }
 
 IMesh* Variable::getMesh() const {
@@ -54,15 +55,13 @@ const std::string& Variable::getName() const {
 }
 
 void Variable::print() const {
-    // 显示变量名称
     std::cout << "Variable: " << m_name << std::endl;
 
-    // 导出到文件
     std::string filename = m_name + ".data";
     std::ofstream outfile(filename);
     if (outfile.is_open()) {
-        for (int i = 0; i < values.size(); ++i) {
-            outfile << mesh->x_size(i) << " " << values[i] << std::endl;
+        for (int i = 0; i < (int)values.size(); ++i) {
+            outfile << mesh->x_size(i) << " " << values[i] << "\n";
         }
         outfile.close();
         std::cout << "Data exported to " << filename << std::endl;

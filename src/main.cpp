@@ -1,3 +1,4 @@
+// main.cpp
 #include "Problem.h"
 #include "UniformMesh.h"
 #include "NonUniformMesh.h"
@@ -12,7 +13,6 @@ enum class MeshType {
     NonUniform
 };
 
-// 工厂函数
 std::unique_ptr<IMesh> createMesh(MeshType meshType, double x_min, double x_max, double dx) {
     switch (meshType) {
         case MeshType::Uniform:
@@ -24,7 +24,6 @@ std::unique_ptr<IMesh> createMesh(MeshType meshType, double x_min, double x_max,
     }
 }
 
-// 字符串到枚举的映射
 MeshType parseMeshType(const std::string& meshTypeStr) {
     static const std::map<std::string, MeshType> meshTypeMap = {
         {"uniform", MeshType::Uniform},
@@ -40,13 +39,11 @@ MeshType parseMeshType(const std::string& meshTypeStr) {
 }
 
 int main(int argc, char** argv) {
-    // 默认参数
     double x_min = 0.0;
     double x_max = 1.0;
     double dx = 0.01;
     std::string meshTypeStr = "uniform";
 
-    // 解析命令行参数
     if (argc >= 4) {
         try {
             x_min = std::stod(argv[1]);
@@ -62,16 +59,18 @@ int main(int argc, char** argv) {
         meshTypeStr = argv[4];
     }
 
-    // 创建网格实例
     try {
         MeshType meshType = parseMeshType(meshTypeStr);
         auto mesh = createMesh(meshType, x_min, x_max, dx);
 
-        // 创建 Problem 实例
         Problem problem(std::move(mesh));
 
-        // 求解问题
+        // 先执行常规求解
         problem.solve();
+
+        // 再执行并行求解以对比
+        problem.solve_parallel();
+
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;

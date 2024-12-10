@@ -1,3 +1,4 @@
+// UniformMesh.cpp
 #include "UniformMesh.h"
 #include <cmath>
 
@@ -19,7 +20,7 @@ double UniformMesh::getFinalPosition() const {
 }
 
 int UniformMesh::getNumberOfPoints() const {
-    return x_points.size();
+    return (int)x_points.size();
 }
 
 double UniformMesh::getStepSize() const {
@@ -27,7 +28,7 @@ double UniformMesh::getStepSize() const {
 }
 
 int UniformMesh::x_size() const {
-    return x_points.size();
+    return (int)x_points.size();
 }
 
 double UniformMesh::x_size(int i) const {

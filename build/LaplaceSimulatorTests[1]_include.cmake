@@ -1,5 +1,0 @@
-if(EXISTS "/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests[1]_tests.cmake")
-  include("/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests[1]_tests.cmake")
-else()
-  add_test(LaplaceSimulatorTests_NOT_BUILT LaplaceSimulatorTests_NOT_BUILT)
-endif()
