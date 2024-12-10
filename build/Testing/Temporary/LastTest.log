@@ -1,13 +1,13 @@
-Start testing: Dec 04 14:16 CET
+Start testing: Dec 10 10:17 CET
 ----------------------------------------------------------
 1/3 Testing: UnitaryTest.MeshTest
 1/3 Test: UnitaryTest.MeshTest
-Command: "/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/LaplaceSimulatorTests" "--gtest_filter=UnitaryTest.MeshTest" "--gtest_also_run_disabled_tests"
-Directory: /home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build
-"UnitaryTest.MeshTest" start time: Dec 04 14:16 CET
+Command: "/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests" "--gtest_filter=UnitaryTest.MeshTest" "--gtest_also_run_disabled_tests"
+Directory: /Users/yifanli/Desktop/M1/c++项目/DM/build
+"UnitaryTest.MeshTest" start time: Dec 10 10:17 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Running main() from /Users/yifanli/Desktop/M1/c++项目/DM/build/_deps/googletest-src/googletest/src/gtest_main.cc
 Note: Google Test filter = UnitaryTest.MeshTest
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
@@ -23,18 +23,18 @@ Note: Google Test filter = UnitaryTest.MeshTest
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.MeshTest" end time: Dec 04 14:16 CET
+"UnitaryTest.MeshTest" end time: Dec 10 10:17 CET
 "UnitaryTest.MeshTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 2/3 Testing: UnitaryTest.ProblemTest
 2/3 Test: UnitaryTest.ProblemTest
-Command: "/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/LaplaceSimulatorTests" "--gtest_filter=UnitaryTest.ProblemTest" "--gtest_also_run_disabled_tests"
-Directory: /home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build
-"UnitaryTest.ProblemTest" start time: Dec 04 14:16 CET
+Command: "/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests" "--gtest_filter=UnitaryTest.ProblemTest" "--gtest_also_run_disabled_tests"
+Directory: /Users/yifanli/Desktop/M1/c++项目/DM/build
+"UnitaryTest.ProblemTest" start time: Dec 10 10:17 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Running main() from /Users/yifanli/Desktop/M1/c++项目/DM/build/_deps/googletest-src/googletest/src/gtest_main.cc
 Note: Google Test filter = UnitaryTest.ProblemTest
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
@@ -63,18 +63,18 @@ VTK data exported to Variable_u_ref.vtk
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.ProblemTest" end time: Dec 04 14:16 CET
+"UnitaryTest.ProblemTest" end time: Dec 10 10:17 CET
 "UnitaryTest.ProblemTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 3/3 Testing: MainFunctionTest.EquationTest
 3/3 Test: MainFunctionTest.EquationTest
-Command: "/home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/LaplaceSimulatorTests" "--gtest_filter=MainFunctionTest.EquationTest" "--gtest_also_run_disabled_tests"
-Directory: /home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build
-"MainFunctionTest.EquationTest" start time: Dec 04 14:16 CET
+Command: "/Users/yifanli/Desktop/M1/c++项目/DM/build/LaplaceSimulatorTests" "--gtest_filter=MainFunctionTest.EquationTest" "--gtest_also_run_disabled_tests"
+Directory: /Users/yifanli/Desktop/M1/c++项目/DM/build
+"MainFunctionTest.EquationTest" start time: Dec 10 10:17 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/yifan/桌面/CHPS_M1/TD_CHALEUR/Yifan/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Running main() from /Users/yifanli/Desktop/M1/c++项目/DM/build/_deps/googletest-src/googletest/src/gtest_main.cc
 Note: Google Test filter = MainFunctionTest.EquationTest
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
@@ -90,8 +90,8 @@ Note: Google Test filter = MainFunctionTest.EquationTest
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"MainFunctionTest.EquationTest" end time: Dec 04 14:16 CET
+"MainFunctionTest.EquationTest" end time: Dec 10 10:17 CET
 "MainFunctionTest.EquationTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Dec 04 14:16 CET
+End testing: Dec 10 10:17 CET
