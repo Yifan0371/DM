@@ -11,7 +11,7 @@ add_executable(LaplaceSimulator
     src/Variable.cpp
     src/UniformMesh.cpp
     src/NonUniformMesh.cpp
-    # Timer.cpp 是可选的，如果之前未创建，可删除此行
+   
     src/Timer.cpp
 )
 
@@ -49,7 +49,7 @@ find_package(Threads REQUIRED)
 target_link_libraries(LaplaceSimulator Threads::Threads)
 target_link_libraries(LaplaceSimulatorTests Threads::Threads)
 
-# 新增：查找TBB（5.3.1要求）
+
 find_package(TBB REQUIRED)
 target_link_libraries(LaplaceSimulator TBB::tbb)
 target_link_libraries(LaplaceSimulatorTests TBB::tbb)
