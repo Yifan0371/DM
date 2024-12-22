@@ -6,7 +6,6 @@ A numerical solver for the Laplace equation that implements both Jacobi and Gaus
 
 - C++17 compiler (GCC 7+ or Clang 5+)
 - CMake 3.10+
-- Google Test (for unit tests)
 - ParaView (optional, for visualization)
 ## Building the Project
 
@@ -53,6 +52,6 @@ Run the test suite:
 ./LaplaceSimulatorTests
 ```
 
-The implementation details have been streamlined in this README while maintaining clear instructions for building, running, and analyzing results. All output files are now organized in the results directory for better data management and analysis.
+All output files are now organized in the results directory for better data management and analysis.
 
-For visualization of numerical results, the generated `.vtk` files in the results directory can be directly loaded into ParaView. This enables users to examine the solution fields, analyze convergence patterns, and create high-quality visualizations for documentation or analysis purposes.
+For visualization of numerical results, the generated `.vtk` files in the results directory can be directly loaded into ParaView. 
