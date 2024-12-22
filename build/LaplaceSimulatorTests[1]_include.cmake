@@ -1,5 +1,0 @@
-if(EXISTS "/home/yifan/桌面/CHPS_M1/TD_CHALEUR/12_22/DM/build/LaplaceSimulatorTests[1]_tests.cmake")
-  include("/home/yifan/桌面/CHPS_M1/TD_CHALEUR/12_22/DM/build/LaplaceSimulatorTests[1]_tests.cmake")
-else()
-  add_test(LaplaceSimulatorTests_NOT_BUILT LaplaceSimulatorTests_NOT_BUILT)
-endif()
